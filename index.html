@@ -1,0 +1,2625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ezequiel Tallaví — CV Interactivo</title>
+  <link rel="icon" type="image/png" href="assets/favicon-general.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================================================
+       CSS VARIABLES — LIGHT / DARK
+    ===================================================== */
+    :root {
+      --bg:         #F5F0E8;
+      --surface:    #FFFFFF;
+      --surface2:   #EDE7DB;
+      --navy:       #1B2A4A;
+      --accent:     #2E4A7A;
+      --accent2:    #4A6FA5;
+      --text:       #1B2A4A;
+      --text-muted: #6B7A99;
+      --border:     #D9D0C0;
+      --tag-bg:     #E8E2D5;
+      --tag-text:   #2E4A7A;
+      --shadow:     0 2px 12px rgba(27,42,74,0.08);
+      --shadow-lg:  0 8px 32px rgba(27,42,74,0.14);
+      --radius:     12px;
+      --radius-sm:  8px;
+      --nav-h:      64px;
+      --transition: 0.25s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg:         #0F1A2E;
+      --surface:    #1B2A4A;
+      --surface2:   #243355;
+      --navy:       #E8E2D5;
+      --accent:     #7FA8D8;
+      --accent2:    #9BBCE8;
+      --text:       #F0EBE0;
+      --text-muted: #9AAAC5;
+      --border:     #2A3D5C;
+      --tag-bg:     #243355;
+      --tag-text:   #9BBCE8;
+      --shadow:     0 2px 12px rgba(0,0,0,0.3);
+      --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* =====================================================
+       RESET & BASE
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Instrument Serif', serif;
+      line-height: 1.2;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-logo img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      transition: opacity var(--transition);
+    }
+
+    #nav-logo-img {
+      height: 40px !important;
+      width: 120px !important;
+      object-fit: contain !important;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .nav-links a {
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1rem;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .btn-icon:hover { background: var(--surface2); }
+
+    .btn-lang {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .btn-lang:hover { background: var(--surface2); }
+
+    .btn-tour {
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 10001;
+      transition: opacity var(--transition);
+    }
+
+    .btn-tour:hover { opacity: 0.85; }
+
+    /* Mobile nav hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: background var(--transition);
+    }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px 16px;
+      gap: 4px;
+    }
+
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .nav-mobile a:hover { background: var(--surface2); color: var(--text); }
+
+    /* =====================================================
+       SECTION COMMON
+    ===================================================== */
+    .section {
+      padding: 80px 24px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .section-line {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 40px;
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+    #hero {
+      padding: 120px 24px 100px;
+      background: var(--bg);
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+
+    .hero-photo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .hero-location {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface);
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-text { }
+
+    .hero-name {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--navy);
+      color: var(--bg);
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity var(--transition);
+      border: 2px solid var(--navy);
+    }
+
+    [data-theme="dark"] .hero-cta {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .hero-cta:hover { opacity: 0.85; }
+
+    /* =====================================================
+       EXPERIENCE
+    ===================================================== */
+    #experiencia { background: var(--surface); }
+
+    .exp-card {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .exp-card.visible { opacity: 1; transform: none; }
+    .exp-card:last-child { border-bottom: none; }
+
+    .exp-meta {
+      padding-top: 4px;
+    }
+
+    .exp-company {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .exp-period {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .exp-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      background: color-mix(in srgb, var(--accent) 15%, transparent);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .exp-role {
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 12px;
+      font-family: 'Instrument Serif', serif;
+    }
+
+    .exp-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 4px 12px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+    }
+
+    /* =====================================================
+       SKILLS
+    ===================================================== */
+    #mi-formacion { background: var(--bg); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .skills-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      align-self: stretch;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition);
+    }
+
+    .skills-card.visible { opacity: 1; transform: none; }
+    .skills-card:hover { box-shadow: var(--shadow-lg); }
+
+    .skills-unified {
+      background: var(--bg);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition);
+    }
+    .skills-unified.visible { opacity: 1; transform: none; }
+    .skills-unified:hover { box-shadow: var(--shadow-lg); }
+    .skills-unified-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .skills-unified-header-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .skills-unified-subtitle {
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .skills-unified-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 16px 0;
+    }
+    .skills-unified-lang-line {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .skills-mini-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .skills-mini-pill {
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .skills-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+    }
+
+    .skills-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skills-list li {
+      font-size: 0.95rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skills-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lang-item:last-child { border-bottom: none; }
+
+    .lang-name { font-weight: 500; font-size: 0.95rem; }
+
+    .lang-level {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .soft-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .soft-pill {
+      padding: 8px 16px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 24px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+    }
+
+    /* =====================================================
+       SOBRE MÍ — unified section
+    ===================================================== */
+    #sobre-mi { background: var(--surface); }
+
+    .sobre-mi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .sobre-mi-left { display: flex; flex-direction: column; }
+    .sobre-mi-grid.sobre-mi-full .sobre-mi-left { grid-column: 1 / -1; }
+    .sobre-mi-grid.sobre-mi-full .skills-unified-body { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 4px; }
+    .sobre-mi-right { display: flex; flex-direction: column; height: 100%; justify-content: space-between; }
+    .sobre-mi-right .sobre-mi-card { margin-bottom: 0; }
+    .sobre-mi-right .sobre-mi-card:first-child { flex: 1; }
+    .sobre-mi-right .sobre-mi-card:last-child { padding-bottom: 16px; }
+    .sobre-mi-col-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .sobre-mi-col-icon { color: var(--accent); flex-shrink: 0; }
+    .sobre-mi-col-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .sobre-mi-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition);
+    }
+    .sobre-mi-card:last-child { margin-bottom: 0; }
+    .sobre-mi-card.visible { opacity: 1; transform: none; }
+    .sobre-mi-card:hover { box-shadow: var(--shadow-lg); }
+    .sobre-mi-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sobre-mi-card-icon { color: var(--accent); flex-shrink: 0; }
+    .sobre-mi-card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .sobre-mi-card-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .sobre-mi-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sobre-mi-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .edu-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 28px 28px 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition);
+    }
+
+    .edu-card.visible { opacity: 1; transform: none; }
+    .edu-card:hover { box-shadow: var(--shadow-lg); }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .edu-institution {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .edu-period {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .edu-degree {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .edu-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.65;
+    }
+
+    .edu-achievements {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* =====================================================
+       REFERENCIAS — CARRUSEL
+    ===================================================== */
+    #referencias { background: var(--bg); }
+
+    .ref-carousel-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ref-carousel {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .ref-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .ref-slide {
+      min-width: 100%;
+      padding: 4px 2px;
+    }
+
+    .ref-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px 32px;
+      box-shadow: var(--shadow);
+      transition: box-shadow var(--transition);
+    }
+
+    .ref-card:hover { box-shadow: var(--shadow-lg); }
+
+    .ref-quote-icon {
+      font-family: 'Instrument Serif', serif;
+      font-size: 4rem;
+      line-height: 0.8;
+      color: var(--border);
+      margin-bottom: 12px;
+      display: block;
+      user-select: none;
+    }
+
+    .ref-quote-text {
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .ref-person {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ref-person-photo-link { flex-shrink: 0; }
+
+    .ref-person-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      display: block;
+      transition: opacity var(--transition);
+    }
+
+    .ref-person-photo-link:hover .ref-person-photo { opacity: 0.8; }
+
+    .ref-initials {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      font-family: 'DM Sans', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .ref-person-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      display: block;
+      margin-bottom: 2px;
+      transition: opacity var(--transition);
+    }
+
+    [data-theme="dark"] .ref-person-name { color: var(--accent2); }
+
+    .ref-person-name:hover { opacity: 0.75; }
+
+    .ref-person-role {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .ref-person-company {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .ref-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .ref-arrow {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: background var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow);
+      line-height: 1;
+    }
+
+    .ref-arrow:hover { background: var(--surface2); box-shadow: var(--shadow-lg); }
+    .ref-arrow:disabled { opacity: 0.3; cursor: default; box-shadow: none; }
+
+    .ref-dots { display: none; }
+
+    .ref-empty {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+
+    .ref-empty-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* =====================================================
+       CONTACTO
+    ===================================================== */
+    #contacto { background: var(--surface); }
+
+    .contact-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 16px;
+      overflow-x: auto;
+    }
+
+    .contact-card {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 24px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: box-shadow var(--transition), transform var(--transition);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition);
+    }
+
+    .contact-card.visible { opacity: 1; transform: none; }
+    .contact-card:hover { box-shadow: var(--shadow-lg); }
+
+    .contact-text { min-width: 0; }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .contact-value {
+      font-size: 0.75rem;
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* =====================================================
+       DESCARGA
+    ===================================================== */
+    #descarga { background: var(--bg); text-align: center; }
+
+    .download-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    #cv-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      #descarga .section-inner { padding: 0 8px; }
+      #cv-download-btn { width: 100%; justify-content: center; }
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    footer {
+      background: var(--navy);
+      color: var(--bg);
+      padding: 32px 24px;
+    }
+
+    [data-theme="dark"] footer {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+
+    .footer-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.7;
+      transition: opacity var(--transition);
+    }
+
+    .footer-logo img:hover { opacity: 1; }
+
+    /* =====================================================
+       CHATBOT
+    ===================================================== */
+    #chat-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 250;
+    }
+    #chat-overlay.visible { display: block; }
+
+    #chat-bubble {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+    }
+
+    .chat-toggle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.32);
+    }
+
+    .chat-panel {
+      position: absolute;
+      bottom: 68px;
+      right: 0;
+      width: 340px;
+      max-height: 500px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform-origin: bottom right;
+      transform: scale(0.9);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .chat-panel.open {
+      transform: scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chat-header {
+      padding: 12px 16px;
+      background: #1a2f6e;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      min-height: 56px;
+    }
+
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.03em;
+    }
+
+    .chat-header-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .chat-header-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .chat-online {
+      font-size: 0.68rem;
+      color: #4ade80;
+      line-height: 1;
+    }
+
+    .chat-header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chat-ai-badge {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-expand {
+      background: none;
+      border: none;
+      color: inherit;
+      opacity: 0.7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: opacity var(--transition);
+      display: flex;
+      align-items: center;
+    }
+    .chat-expand:hover { opacity: 1; }
+
+    .chat-panel.expanded {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+      width: 70vw;
+      height: 80vh;
+      max-height: 80vh;
+      bottom: auto;
+      right: auto;
+      z-index: 300;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chat-close {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 1.1rem;
+      opacity: 0.7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: opacity var(--transition);
+    }
+
+    .chat-close:hover { opacity: 1; }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    .chat-msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .chat-msg.user {
+      background: var(--accent);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-msg.assistant {
+      background: var(--surface2);
+      color: var(--text);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 12px 16px;
+      background: var(--surface2);
+      border-radius: 18px;
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+    }
+    .chat-typing-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      animation: chat-dot-bounce 1.2s infinite ease-in-out;
+    }
+    .chat-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes chat-dot-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    .chat-input-row {
+      padding: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.875rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .chat-input:focus { border-color: var(--accent); }
+
+    .chat-send {
+      padding: 9px 16px;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: opacity var(--transition);
+    }
+
+    .chat-send:hover { opacity: 0.85; }
+    .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .chat-faq-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .chat-faq-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      cursor: pointer;
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .chat-faq-chip:hover { background: var(--tag-bg); border-color: var(--accent2); }
+
+    /* =====================================================
+       TOUR GUIDE
+    ===================================================== */
+    body.tour-active .section:not(.tour-spotlight) {
+      filter: blur(3px);
+      opacity: 0.45;
+      pointer-events: none;
+      transition: filter 0.4s ease, opacity 0.4s ease;
+    }
+
+    body.tour-active .section.tour-spotlight {
+      filter: none;
+      opacity: 1;
+      position: relative;
+      z-index: 50;
+    }
+
+    #tour-tooltip {
+      position: fixed;
+      z-index: 10000;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: var(--navy);
+      color: var(--bg);
+      max-width: 380px;
+      width: 90%;
+      padding: 24px 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      display: none;
+    }
+
+    [data-theme="dark"] #tour-tooltip {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    #tour-tooltip.active { display: block; }
+
+    .tour-step {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+
+    .tour-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .tour-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+
+    .tour-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tour-skip {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      padding: 0;
+    }
+
+    .tour-skip:hover { opacity: 1; }
+
+    .tour-next {
+      padding: 9px 24px;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    [data-theme="dark"] .tour-next { background: var(--accent2); }
+
+    /* =====================================================
+       TOUR DARK OVERLAY
+    ===================================================== */
+    #tour-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 9000;
+      display: none;
+      pointer-events: none;
+    }
+
+    body.tour-active #tour-overlay { display: block; }
+
+    /* =====================================================
+       SCROLL PROGRESS BAR
+    ===================================================== */
+    #scroll-progress {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      width: 0%;
+      height: 3px;
+      z-index: 200;
+      background: rgba(26, 47, 110, 0.4);
+      transition: width 0.1s linear;
+    }
+
+    [data-theme="dark"] #scroll-progress {
+      background: rgba(147, 197, 253, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      #scroll-progress { display: block; }
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner {
+        gap: 0;
+        justify-content: space-between;
+      }
+      .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      #hero { padding: 16px; padding-bottom: 80px; min-height: unset; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .hero-photo-wrap { width: 150px; height: auto; display: flex; flex-direction: column; align-items: center; }
+      .hero-photo, .hero-photo-placeholder { width: 150px; height: 150px; }
+
+      .hero-location {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 12px auto 8px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-name  { font-size: 1.8rem; }
+      .hero-title { font-size: 0.95rem; }
+      .hero-bio   {
+        font-size: 0.85rem;
+        line-height: 1.55;
+        margin: 0 auto 16px;
+        max-height: none;
+        overflow: visible;
+        display: block;
+      }
+      .hero-cta { padding: 10px 24px; font-size: 0.9rem; margin: 0 auto; }
+
+      .exp-company     { font-size: 1rem; font-weight: 600; }
+      .exp-period      { font-size: 0.8rem; }
+      .exp-role        { font-size: 1.1rem; font-weight: 600; }
+      .exp-description { font-size: 0.85rem; line-height: 1.6; }
+      .tag             { font-size: 0.75rem; padding: 4px 10px; }
+
+      .exp-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .section { padding: 56px 20px; }
+
+      .chat-panel { width: 300px; }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+
+      #tour-tooltip {
+        bottom: 24px;
+        padding: 20px;
+      }
+
+      .btn-tour {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+
+      .btn-tour .tour-text {
+        display: none;
+      }
+
+      #chat-bubble { bottom: 16px; right: 16px; }
+      .chat-toggle { width: 48px; height: 48px; font-size: 1.2rem; }
+      .chat-expand { display: none; }
+      .chat-panel.open {
+        position: fixed;
+        bottom: auto;
+        right: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        width: 92vw;
+        height: 85vh;
+        max-height: 85vh;
+        z-index: 300;
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .ref-card { padding: 20px; }
+
+      .skills-grid { grid-template-columns: 1fr; }
+      .skills-card       { padding: 16px; border-radius: 10px; }
+      .skills-card-title { font-size: 0.7rem; }
+      .skills-list li    { font-size: 0.85rem; margin-bottom: 8px; }
+
+      #edu-list          { display: flex; flex-direction: column; gap: 12px; }
+      .edu-card          { padding: 16px; margin-bottom: 0; }
+      .edu-institution   { font-size: 1rem; font-weight: 700; }
+      .edu-degree        { font-size: 0.9rem; }
+      .edu-period        { font-size: 0.75rem; }
+      .edu-description   { font-size: 0.8rem; line-height: 1.5; }
+      .edu-achievements  { font-size: 0.75rem; }
+
+      .sobre-mi-grid     { grid-template-columns: 1fr; }
+      .sobre-mi-grid.sobre-mi-full .skills-unified-body { grid-template-columns: 1fr; gap: 0; }
+      .sobre-mi-right    { gap: 14px; }
+      .sobre-mi-card     { padding: 16px; }
+
+      .contact-grid { flex-wrap: wrap; }
+      .contact-card {
+        flex: 1 1 calc(50% - 8px);
+        padding: 16px;
+        background: var(--surface);
+        border-radius: 12px;
+      }
+      .contact-value {
+        font-size: 0.72rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+    }
+
+    /* =====================================================
+       SCROLLBAR
+    ===================================================== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  </style>
+</head>
+
+<body data-theme="light" data-lang="es">
+
+  <!-- ======================================================
+       NAVBAR
+  ====================================================== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="https://interactivevitae.com" target="_blank" rel="noopener" class="nav-logo">
+        <img id="nav-logo-img" src="assets/logo.png" alt="Interactive Vitae" />
+      </a>
+
+      <div class="nav-links">
+        <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
+        <a href="#mi-formacion" data-i18n="nav.formation">Mi Formación</a>
+        <a href="#sobre-mi" data-i18n="nav.aboutme">Sobre mí</a>
+        <a href="#referencias" data-i18n="nav.references">Referencias</a>
+        <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+        <a href="#descarga" data-i18n="nav.download">CV</a>
+      </div>
+
+      <div class="nav-controls">
+        <button class="btn-tour" id="btn-tour" onclick="startTour()">
+          <span class="tour-text" data-i18n="tour.button">Tour</span> ✦
+        </button>
+        <button class="btn-lang" id="btn-lang" onclick="toggleLang()">EN</button>
+        <button class="btn-icon" id="btn-theme" onclick="toggleTheme()" title="Toggle theme">
+          <span id="theme-icon">☾</span>
+        </button>
+        <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#experiencia" data-i18n="nav.experience" onclick="closeMobileNav()">Experiencia</a>
+      <a href="#mi-formacion" data-i18n="nav.formation" onclick="closeMobileNav()">Mi Formación</a>
+      <a href="#sobre-mi" data-i18n="nav.aboutme" onclick="closeMobileNav()">Sobre mí</a>
+      <a href="#referencias" data-i18n="nav.references" onclick="closeMobileNav()">Referencias</a>
+      <a href="#contacto" data-i18n="nav.contact" onclick="closeMobileNav()">Contacto</a>
+      <a href="#descarga" data-i18n="nav.download" onclick="closeMobileNav()">CV</a>
+    </div>
+  </nav>
+  <div id="scroll-progress"></div>
+
+  <!-- ======================================================
+       HERO
+  ====================================================== -->
+  <section id="hero" class="section">
+    <div class="hero-inner">
+      <div class="hero-photo-wrap" id="hero-photo-wrap">
+        <!-- populated by JS -->
+      </div>
+      <div class="hero-text">
+        <h1 class="hero-name" id="hero-name"></h1>
+        <p class="hero-title" id="hero-title"></p>
+        <p class="hero-bio" id="hero-bio"></p>
+        <a href="#contacto" class="hero-cta">
+          <span data-i18n="hero.cta">Ver contacto</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       EXPERIENCIA
+  ====================================================== -->
+  <section id="experiencia" class="section">
+    <div class="section-inner">
+      <h2 class="section-title" data-i18n="sections.experience">Experiencia</h2>
+      <div class="section-line"></div>
+      <div id="exp-list"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       MI FORMACIÓN
+  ====================================================== -->
+  <section id="mi-formacion" class="section">
+    <div class="section-inner">
+      <h2 class="section-title" data-i18n="sections.formation">Mi Formación</h2>
+      <div class="section-line"></div>
+      <div id="edu-list"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SOBRE MÍ
+  ====================================================== -->
+  <section id="sobre-mi" class="section">
+    <div class="section-inner">
+      <h2 class="section-title" data-i18n="sections.aboutme">Sobre mí</h2>
+      <div class="section-line"></div>
+      <div class="sobre-mi-grid">
+        <div class="sobre-mi-left">
+          <div id="skills-unified"></div>
+        </div>
+        <div class="sobre-mi-right">
+          <div id="about-cards"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       REFERENCIAS
+  ====================================================== -->
+  <section id="referencias" class="section">
+    <div class="section-inner">
+      <h2 class="section-title" data-i18n="sections.references">Referencias</h2>
+      <div class="section-line"></div>
+      <div id="ref-carousel-wrap" class="ref-carousel-wrap">
+        <button class="ref-arrow" id="ref-prev" onclick="refCarousel(-1)" disabled>‹</button>
+        <div class="ref-carousel">
+          <div class="ref-track" id="ref-track"></div>
+        </div>
+        <button class="ref-arrow" id="ref-next" onclick="refCarousel(1)">›</button>
+      </div>
+      <div class="ref-dots" id="ref-dots"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       CONTACTO
+  ====================================================== -->
+  <section id="contacto" class="section">
+    <div class="section-inner">
+      <h2 class="section-title" data-i18n="sections.contact">Contacto</h2>
+      <div class="section-line"></div>
+      <div class="contact-grid" id="contact-grid"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       DESCARGA
+  ====================================================== -->
+  <section id="descarga" class="section">
+    <div class="section-inner" style="text-align:center">
+      <h2 class="section-title" style="display:inline-block" data-i18n="download.title">Descargá mi CV</h2>
+      <div class="section-line" style="margin:0 auto 16px"></div>
+      <p class="download-subtitle" data-i18n="download.subtitle">El archivo PDF varía según el idioma seleccionado</p>
+      <a id="cv-download-btn" class="hero-cta" href="assets/cv-es-tallavi.pdf" download="Ezequiel_Tallavi_CV.pdf">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="download.button">Descargar CV</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy" id="footer-copy"></p>
+      <a href="https://interactivevitae.com" target="_blank" rel="noopener" class="footer-logo">
+        <img id="footer-logo-img" src="assets/logo-footer.png" alt="Interactive Vitae" />
+      </a>
+    </div>
+  </footer>
+
+  <!-- ======================================================
+       CHATBOT
+  ====================================================== -->
+  <div id="chat-overlay" onclick="collapseChat()"></div>
+
+  <div id="chat-bubble">
+    <div class="chat-panel" id="chat-panel">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar" id="chat-avatar">ET</div>
+          <div class="chat-header-info">
+            <span class="chat-header-name" id="chat-header-name">Ezequiel AI</span>
+            <span class="chat-online">● Online</span>
+          </div>
+        </div>
+        <div class="chat-header-right">
+          <span class="chat-ai-badge">✦ AI</span>
+          <button class="chat-expand" id="chat-expand-btn" onclick="toggleExpandChat()" title="Expandir" aria-label="Expandir chat">
+            <svg id="chat-expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+          <button class="chat-close" onclick="closeChat()">✕</button>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-row">
+        <input
+          class="chat-input"
+          id="chat-input"
+          type="text"
+          placeholder="Escribe tu pregunta..."
+          onkeydown="if(event.key==='Enter') sendMessage()"
+        />
+        <button class="chat-send" id="chat-send" onclick="sendMessage()">
+          ↑
+        </button>
+      </div>
+    </div>
+    <button class="chat-toggle" onclick="toggleChat()" id="chat-toggle-btn" aria-label="Abrir chat">
+      💬
+    </button>
+  </div>
+
+  <!-- ======================================================
+       TOUR GUIDE
+  ====================================================== -->
+  <div id="tour-overlay"></div>
+
+  <div id="tour-tooltip">
+    <div class="tour-step" id="tour-step-label"></div>
+    <div class="tour-title" id="tour-title-text"></div>
+    <div class="tour-desc" id="tour-desc-text"></div>
+    <div class="tour-buttons">
+      <button class="tour-skip" onclick="endTour()" id="tour-skip-btn">Salir del tour</button>
+      <button class="tour-next" onclick="nextTourStep()" id="tour-next-btn">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       DATA
+  ====================================================== -->
+  <script src="cliente-data.js"></script>
+
+  <!-- ======================================================
+       APP
+  ====================================================== -->
+  <script>
+    // =====================================================
+    // STATE
+    // =====================================================
+    const state = {
+      lang: 'es',
+      theme: 'light',
+      chatOpen: false,
+      chatExpanded: false,
+      chatLoading: false,
+      chatMessages: [],        // { role, content }
+      tourActive: false,
+      tourStep: 0,
+    };
+
+    // =====================================================
+    // i18n STRINGS (UI strings not in CLIENT_DATA)
+    // =====================================================
+    const UI = {
+      es: {
+        'nav.experience':     'Experiencia',
+        'nav.skills':         'Skills',
+        'nav.formation':      'Mi Formación',
+        'nav.aboutme':        'Sobre mí',
+        'nav.references':     'Referencias',
+        'nav.contact':        'Contacto',
+        'nav.download':       'CV',
+        'download.title':     'Descargá mi CV',
+        'download.subtitle':  'El archivo PDF varía según el idioma seleccionado',
+        'download.button':    'Descargar CV',
+        'hero.cta':           'Ver contacto',
+        'sections.experience':'Experiencia',
+        'sections.skills':    'Skills',
+        'sections.formation': 'Mi Formación',
+        'sections.aboutme':   'Sobre mí',
+        'sections.aboutme.skills': 'Cómo trabajo',
+        'sections.aboutme.sports': 'Deporte & Vida Activa',
+        'sections.aboutme.automotive': 'Industria Automotriz',
+        'sections.references':'Referencias',
+        'sections.contact':   'Contacto',
+        'tour.button':        'Tour',
+        'skills.tools':        'Herramientas',
+        'skills.professional': 'Skills',
+        'skills.languages':   'Idiomas',
+        'skills.soft':        'Soft Skills',
+        'current':            'Actual',
+        'ref.empty.title':    'Referencias disponibles próximamente',
+        'ref.empty.sub':      'Próximamente se añadirán referencias profesionales.',
+        'ref.linkedin':       'Ver LinkedIn',
+        'contact.email':      'Email',
+        'contact.phone':      'Teléfono',
+        'contact.linkedin':   'LinkedIn',
+        'contact.location':   'Ubicación',
+        'chat.placeholder':   'Escribe tu pregunta...',
+        'chat.header':        'Asistente de Ezequiel',
+        'chat.welcome':       'Hola 👋 Soy la IA que representa el perfil profesional de Ezequiel Tallaví. Puedo contarte sobre su experiencia, evaluar si Ezequiel encaja con el perfil que estás buscando y responder cualquier duda. ¿Con quién estoy hablando y qué tipo de rol o perfil estás buscando?',
+        'chat.error':         'Hubo un error. Por favor intentá de nuevo.',
+        'chat.faq.unavailable': 'El asistente no está disponible en este momento. Igualmente, podés ver las preguntas que ya hicieron otros.',
+        'chat.faq.followup':  '¿Querés ver otra pregunta frecuente sobre el perfil de Ezequiel?',
+        'chat.faq.yes':       'Sí',
+        'chat.faq.no':        'No',
+        'chat.faq.thanks':    '¡Gracias por consultar el perfil de Ezequiel! Si necesitás saber algo más, escribime cuando quieras.',
+        'chat.typing':        'Escribiendo...',
+        'tour.skip':          'Salir del tour',
+        'tour.next':          'Siguiente →',
+        'tour.finish':        'Finalizar tour',
+        'tour.of':            'de',
+      },
+      en: {
+        'nav.experience':     'Experience',
+        'nav.skills':         'Skills',
+        'nav.formation':      'My Background',
+        'nav.aboutme':        'About me',
+        'nav.references':     'References',
+        'nav.contact':        'Contact',
+        'nav.download':       'CV',
+        'download.title':     'Download my CV',
+        'download.subtitle':  'The PDF file varies depending on the selected language',
+        'download.button':    'Download CV',
+        'hero.cta':           'See contact',
+        'sections.experience':'Experience',
+        'sections.skills':    'Skills',
+        'sections.formation': 'My Background',
+        'sections.aboutme':   'About me',
+        'sections.aboutme.skills': 'How I work',
+        'sections.aboutme.sports': 'Sports & Active Life',
+        'sections.aboutme.automotive': 'Automotive Industry',
+        'sections.references':'References',
+        'sections.contact':   'Contact',
+        'tour.button':        'Tour',
+        'skills.tools':        'Tools',
+        'skills.professional': 'Skills',
+        'skills.languages':   'Languages',
+        'skills.soft':        'Soft Skills',
+        'current':            'Current',
+        'ref.empty.title':    'References coming soon',
+        'ref.empty.sub':      'Professional references will be added shortly.',
+        'ref.linkedin':       'View LinkedIn',
+        'contact.email':      'Email',
+        'contact.phone':      'Phone',
+        'contact.linkedin':   'LinkedIn',
+        'contact.location':   'Location',
+        'chat.placeholder':   'Ask me anything...',
+        'chat.header':        "Ezequiel's Assistant",
+        'chat.welcome':       "Hi 👋 I'm the AI representing Ezequiel Tallaví's professional profile. I can tell you about his experience, assess whether he's a good fit for the role you're considering, and answer any questions you may have. Who am I speaking with, and what kind of role or profile are you looking for?",
+        'chat.error':         'An error occurred. Please try again.',
+        'chat.faq.unavailable': 'The assistant is currently unavailable. You can still browse questions others have asked.',
+        'chat.faq.followup':  "Would you like to see another frequently asked question about Ezequiel's profile?",
+        'chat.faq.yes':       'Yes',
+        'chat.faq.no':        'No thanks',
+        'chat.faq.thanks':    "Thanks for checking out Ezequiel's profile! Feel free to reach out again if you need anything.",
+        'chat.typing':        'Typing...',
+        'tour.skip':          'Exit tour',
+        'tour.next':          'Next →',
+        'tour.finish':        'Finish tour',
+        'tour.of':            'of',
+      }
+    };
+
+    const t = (key) => UI[state.lang][key] || key;
+
+    // =====================================================
+    // TOUR STEPS
+    // =====================================================
+    const tourSteps = [
+      {
+        sectionId: 'hero',
+        title: { es: 'Hola, soy Ezequiel', en: "Hi, I'm Ezequiel" },
+        desc: {
+          es: 'Te dejo un recorrido rápido por mi perfil: qué hago, en qué trabajé y cómo puedo aportar.',
+          en: "Here's a quick tour of my profile: what I do, where I've worked, and what I can bring to the table."
+        }
+      },
+      {
+        sectionId: 'experiencia',
+        title: { es: 'Qué hice hasta ahora', en: "What I've done so far" },
+        desc: {
+          es: 'Experiencias, roles y resultados en cada etapa de mi carrera.',
+          en: 'Experiences, roles, and results at each stage of my career.'
+        }
+      },
+      {
+        sectionId: 'mi-formacion',
+        title: { es: 'Mi Formación', en: 'My Background' },
+        desc: {
+          es: 'Dónde estudié, qué títulos obtuve y los logros académicos que fui sumando en el camino.',
+          en: "Where I studied, what degrees I earned, and the academic achievements I've built along the way."
+        }
+      },
+      {
+        sectionId: 'sobre-mi',
+        title: { es: 'Cómo trabajo', en: 'How I work' },
+        desc: {
+          es: 'Mis habilidades, herramientas e intereses fuera del trabajo.',
+          en: 'My skills, tools, and interests outside of work.'
+        }
+      },
+      {
+        sectionId: 'contacto',
+        title: { es: 'Conectemos', en: "Let's connect" },
+        desc: {
+          es: 'Si te interesa mi perfil, acá tenés mis datos para contactarme.',
+          en: 'If my profile interests you, here are my details to get in touch.'
+        }
+      }
+    ];
+
+    // =====================================================
+    // RENDER FUNCTIONS
+    // =====================================================
+
+    function renderHero() {
+      const d = CLIENT_DATA;
+      const l = state.lang;
+
+      // Photo
+      const wrap = document.getElementById('hero-photo-wrap');
+      const photoHTML = `
+        <img
+          class="hero-photo"
+          src="assets/foto-tallavi.jpg"
+          alt="${d.personal.name}"
+          onerror="this.replaceWith(document.getElementById('_photo_placeholder').content.cloneNode(true).firstElementChild)"
+        />
+        <template id="_photo_placeholder">
+          <div class="hero-photo-placeholder">👤</div>
+        </template>
+        <div class="hero-location">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${d.personal.location[l]}
+        </div>`;
+      wrap.innerHTML = photoHTML;
+
+      document.getElementById('hero-name').textContent = d.personal.name;
+      document.getElementById('hero-title').textContent = d.personal.title[l];
+      document.getElementById('hero-bio').textContent = d.personal.bio[l];
+    }
+
+    function renderExperience() {
+      const l = state.lang;
+      const list = document.getElementById('exp-list');
+      list.innerHTML = CLIENT_DATA.experience.map(exp => `
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="exp-company">${exp.company}</div>
+            <div class="exp-period">${exp.period[l]}</div>
+            ${exp.current ? `<span class="exp-badge">${t('current')}</span>` : ''}
+          </div>
+          <div class="exp-body">
+            <h3 class="exp-role">${exp.role[l]}</h3>
+            <p class="exp-description">${exp.description[l]}</p>
+            <div class="exp-tags">
+              ${exp.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderSkills() {
+      const l = state.lang;
+      const sk = CLIENT_DATA.skills;
+      const container = document.getElementById('skills-unified');
+      if (!container) return;
+
+      const toolsList   = sk.tools.map(item => `<li>${item[l]}</li>`).join('');
+      const profList    = sk.professional.map(item => `<li>${item[l]}</li>`).join('');
+      const langLine    = sk.languages.map(lang => `${lang.language[l]} ${lang.levelShort[l]}`).join(' · ');
+
+      container.innerHTML = `
+        <div class="skills-unified">
+          <div class="skills-unified-header">
+            <span class="sobre-mi-col-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </span>
+            <div>
+              <div class="skills-unified-header-title">${t('sections.aboutme.skills')}</div>
+              <div class="skills-unified-lang-line">${langLine}</div>
+            </div>
+          </div>
+          <div class="skills-unified-body">
+            <div>
+              <div class="skills-unified-subtitle">${t('skills.tools')}</div>
+              <ul class="skills-list">${toolsList}</ul>
+            </div>
+            <div>
+              <div class="skills-unified-subtitle">${t('skills.professional')}</div>
+              <ul class="skills-list">${profList}</ul>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderEducation() {
+      const l = state.lang;
+      const list = document.getElementById('edu-list');
+      list.innerHTML = CLIENT_DATA.education.map(edu => `
+        <div class="edu-card">
+          <div class="edu-header">
+            <span class="edu-institution">${edu.institution}</span>
+            <span class="edu-period">${typeof edu.period === 'object' ? edu.period[l] : edu.period}</span>
+          </div>
+          <div class="edu-degree">${edu.degree[l]}</div>
+          <p class="edu-description">${edu.description[l]}</p>
+          <div class="edu-achievements">${edu.achievements[l]}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderAboutMe() {
+      const l = state.lang;
+      const am = CLIENT_DATA.aboutMe || {};
+      const cards = document.getElementById('about-cards');
+      if (!cards) return;
+
+      const sportsTitle = t('sections.aboutme.sports');
+      const autoTitle   = t('sections.aboutme.automotive');
+
+      const sportsHTML = am.sports ? `
+        <div class="sobre-mi-card">
+          <div class="sobre-mi-card-header">
+            <span class="sobre-mi-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v4l-2 4"/><path d="M12 11l2 4"/><path d="M10 15h4"/><path d="M9 15l-2 5"/><path d="M15 15l2 5"/></svg>
+            </span>
+            <span class="sobre-mi-card-title">${sportsTitle}</span>
+          </div>
+          <p class="sobre-mi-card-body">${am.sports.text[l]}</p>
+        </div>` : '';
+
+      const autoTags = am.automotive && am.automotive.tags
+        ? am.automotive.tags[l].map(tag => `<span class="sobre-mi-tag">${tag}</span>`).join('')
+        : '';
+
+      const autoHTML = am.automotive ? `
+        <div class="sobre-mi-card">
+          <div class="sobre-mi-card-header">
+            <span class="sobre-mi-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <span class="sobre-mi-card-title">${autoTitle}</span>
+          </div>
+          <p class="sobre-mi-card-body">${am.automotive.text[l]}</p>
+          ${autoTags ? `<div class="sobre-mi-tags">${autoTags}</div>` : ''}
+        </div>` : '';
+
+      cards.innerHTML = autoHTML + sportsHTML;
+      const hasInterests = !!(autoHTML || sportsHTML);
+      const right = document.querySelector('.sobre-mi-right');
+      if (right) right.style.display = hasInterests ? '' : 'none';
+      const grid = document.querySelector('.sobre-mi-grid');
+      if (grid) grid.classList.toggle('sobre-mi-full', !hasInterests);
+    }
+
+    // =====================================================
+    // CAROUSEL STATE
+    // =====================================================
+    let refIndex = 0;
+
+    function refCarousel(dir) {
+      const total = CLIENT_DATA.references.length;
+      refIndex = Math.max(0, Math.min(total - 1, refIndex + dir));
+      updateCarousel();
+    }
+
+    function goToRef(i) {
+      refIndex = i;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const track = document.getElementById('ref-track');
+      const prev  = document.getElementById('ref-prev');
+      const next  = document.getElementById('ref-next');
+      const total = CLIENT_DATA.references.length;
+      if (!track) return;
+      track.style.transform = `translateX(-${refIndex * 100}%)`;
+      document.querySelectorAll('.ref-dot').forEach((d, i) => d.classList.toggle('active', i === refIndex));
+      if (prev) prev.disabled = refIndex === 0;
+      if (next) next.disabled = refIndex === total - 1;
+    }
+
+    function initCarouselSwipe() {
+      const carousel = document.querySelector('.ref-carousel');
+      if (!carousel) return;
+      let touchStartX = 0;
+      carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      carousel.addEventListener('touchend', e => {
+        const delta = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(delta) > 50) refCarousel(delta > 0 ? 1 : -1);
+      }, { passive: true });
+    }
+
+    function refInitials(name) {
+      const parts = name.trim().split(' ');
+      return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    }
+
+    function renderReferences() {
+      const l = state.lang;
+      const track = document.getElementById('ref-track');
+      const dotsEl = document.getElementById('ref-dots');
+      const refs = CLIENT_DATA.references;
+
+      // Hide section + navbar links if empty or explicitly disabled
+      const hidden = refs.length === 0 || CLIENT_DATA.referencesVisible === false;
+      const section = document.getElementById('referencias');
+      if (section) section.style.display = hidden ? 'none' : '';
+      document.querySelectorAll('a[href="#referencias"]').forEach(a => {
+        a.style.display = hidden ? 'none' : '';
+      });
+      if (hidden) return;
+
+      // Empty state — hide arrows, show message in track
+      if (refs.length === 0) {
+        track.innerHTML = `
+          <div class="ref-slide">
+            <div class="ref-empty">
+              <div class="ref-empty-icon">🤝</div>
+              <strong>${t('ref.empty.title')}</strong>
+              <p style="margin-top:8px;font-size:0.85rem;opacity:0.7">${t('ref.empty.sub')}</p>
+            </div>
+          </div>`;
+        dotsEl.innerHTML = '';
+        const prev = document.getElementById('ref-prev');
+        const next = document.getElementById('ref-next');
+        if (prev) prev.style.display = 'none';
+        if (next) next.style.display = 'none';
+        return;
+      }
+
+      track.innerHTML = refs.map(ref => {
+        const initials = refInitials(ref.name);
+        const photoEl = ref.photo
+          ? `<img class="ref-person-photo" src="${ref.photo}" alt="${ref.name}"
+               onerror="this.outerHTML='<div class=\\'ref-initials\\'>${initials}</div>'" />`
+          : `<div class="ref-initials">${initials}</div>`;
+        const personWrap = ref.linkedin
+          ? `<a href="${ref.linkedin}" target="_blank" rel="noopener" class="ref-person-photo-link">${photoEl}</a>
+             <div class="ref-person-info">
+               <a href="${ref.linkedin}" target="_blank" rel="noopener" class="ref-person-name">${ref.name}</a>`
+          : `<div class="ref-person-photo-link">${photoEl}</div>
+             <div class="ref-person-info">
+               <span class="ref-person-name">${ref.name}</span>`;
+        return `
+          <div class="ref-slide">
+            <div class="ref-card">
+              <div class="ref-person">
+                ${personWrap}
+                  <div class="ref-person-role">${ref.role ? (typeof ref.role === 'object' ? ref.role[l] : ref.role) : ''}</div>
+                  <div class="ref-person-company">${ref.company}</div>
+                  ${ref.relation ? `<span class="ref-badge">${ref.relation[l]}</span>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      dotsEl.innerHTML = refs.map((_, i) =>
+        `<button class="ref-dot${i === refIndex ? ' active' : ''}" onclick="goToRef(${i})" aria-label="Referencia ${i + 1}"></button>`
+      ).join('');
+
+      updateCarousel();
+      initCarouselSwipe();
+    }
+
+    function renderContact() {
+      const d = CLIENT_DATA.personal;
+      const l = state.lang;
+      const grid = document.getElementById('contact-grid');
+
+      const SVG = {
+        email:    `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+        phone:    `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.6 4.95 2 2 0 0 1 3.59 3h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.7a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+        linkedin: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+        location: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+      };
+
+      const items = [
+        { icon: SVG.email,    label: t('contact.email'),    href: `mailto:${d.email}` },
+        { icon: SVG.phone,    label: 'WHATSAPP',            href: 'https://wa.me/5491150100586' },
+        { icon: SVG.linkedin, label: t('contact.linkedin'), href: `https://${d.linkedin}` },
+        { icon: SVG.location, label: 'BUENOS AIRES',        href: null },
+      ];
+
+      grid.innerHTML = items.map(item => {
+        const inner = `
+          <div class="contact-icon">${item.icon}</div>
+          <div class="contact-label">${item.label}</div>`;
+        return item.href
+          ? `<a href="${item.href}" target="_blank" rel="noopener" class="contact-card">${inner}</a>`
+          : `<div class="contact-card">${inner}</div>`;
+      }).join('');
+    }
+
+    function renderFooter() {
+      const year = new Date().getFullYear();
+      document.getElementById('footer-copy').textContent =
+        `© ${year} ${CLIENT_DATA.personal.name} · Powered by Interactive Vitae`;
+    }
+
+    function renderI18n() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        const val = t(key);
+        if (val) el.textContent = val;
+      });
+      document.getElementById('chat-input').placeholder = t('chat.placeholder');
+      document.getElementById('tour-skip-btn').textContent = t('tour.skip');
+      document.documentElement.lang = state.lang;
+    }
+
+    function updateDownloadButton() {
+      const btn = document.getElementById('cv-download-btn');
+      if (!btn) return;
+      if (state.lang === 'es') {
+        btn.href = 'assets/cv-es-tallavi.pdf';
+        btn.download = 'Ezequiel_Tallavi_CV.pdf';
+      } else {
+        btn.href = 'assets/cv-en-tallavi.pdf';
+        btn.download = 'Ezequiel_Tallavi_CV_EN.pdf';
+      }
+    }
+
+    function initChatHeader() {
+      const name = CLIENT_DATA.personal.name;
+      const parts = name.trim().split(/\s+/);
+      const initials = (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+      const firstName = parts[0];
+      document.getElementById('chat-avatar').textContent = initials;
+      document.getElementById('chat-header-name').textContent = firstName + ' AI';
+    }
+
+    function render() {
+      renderHero();
+      renderExperience();
+      renderSkills();
+      renderEducation();
+      renderAboutMe();
+      renderReferences();
+      renderContact();
+      renderFooter();
+      renderI18n();
+      updateDownloadButton();
+      initChatHeader();
+      observeCards();
+
+      const scrollBar = document.getElementById('scroll-progress');
+      window.addEventListener('scroll', () => {
+        const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        scrollBar.style.width = scrolled + '%';
+      }, { passive: true });
+    }
+
+    // =====================================================
+    // LANGUAGE TOGGLE
+    // =====================================================
+    function toggleLang() {
+      state.lang = state.lang === 'es' ? 'en' : 'es';
+      document.body.dataset.lang = state.lang;
+      document.getElementById('btn-lang').textContent = state.lang === 'es' ? 'EN' : 'ES';
+      render();
+      // Re-init chat welcome if no messages yet
+      if (state.chatMessages.length === 0) {
+        initChatWelcome();
+      }
+    }
+
+    // =====================================================
+    // THEME TOGGLE
+    // =====================================================
+    function toggleTheme() {
+      state.theme = state.theme === 'light' ? 'dark' : 'light';
+      document.body.dataset.theme = state.theme;
+      document.getElementById('theme-icon').textContent = state.theme === 'light' ? '☾' : '☀';
+      updateLogoForTheme();
+      localStorage.setItem('iv-theme', state.theme);
+    }
+
+    function updateLogoForTheme() {
+      const src = state.theme === 'dark' ? 'assets/logo-footer.png' : 'assets/logo.png';
+      document.getElementById('nav-logo-img').src = src;
+    }
+
+    function loadSavedTheme() {
+      const saved = localStorage.getItem('iv-theme');
+      if (saved && saved !== state.theme) {
+        state.theme = saved;
+        document.body.dataset.theme = state.theme;
+        document.getElementById('theme-icon').textContent = state.theme === 'light' ? '☾' : '☀';
+        updateLogoForTheme();
+      }
+    }
+
+    // =====================================================
+    // MOBILE NAV
+    // =====================================================
+    function toggleMobileNav() {
+      document.getElementById('nav-mobile').classList.toggle('open');
+    }
+
+    function closeMobileNav() {
+      document.getElementById('nav-mobile').classList.remove('open');
+    }
+
+    // =====================================================
+    // CHATBOT
+    // =====================================================
+    function toggleChat() {
+      state.chatOpen ? closeChat() : openChat();
+    }
+
+    const ICON_EXPAND   = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
+    const ICON_COLLAPSE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="14" y1="10" x2="21" y2="3"/></svg>';
+
+    function expandChat() {
+      state.chatExpanded = true;
+      // Raise #chat-bubble above the overlay so blur doesn't cover the chat
+      document.getElementById('chat-bubble').style.zIndex = '300';
+      document.getElementById('chat-panel').classList.add('expanded');
+      document.getElementById('chat-overlay').classList.add('visible');
+      document.getElementById('chat-expand-btn').innerHTML = ICON_COLLAPSE;
+    }
+
+    function collapseChat() {
+      state.chatExpanded = false;
+      document.getElementById('chat-bubble').style.zIndex = '';
+      document.getElementById('chat-panel').classList.remove('expanded');
+      document.getElementById('chat-overlay').classList.remove('visible');
+      const btn = document.getElementById('chat-expand-btn');
+      if (btn) btn.innerHTML = ICON_EXPAND;
+    }
+
+    function toggleExpandChat() {
+      state.chatExpanded ? collapseChat() : expandChat();
+    }
+
+    function openChat() {
+      state.chatOpen = true;
+      document.getElementById('chat-panel').classList.add('open');
+      document.getElementById('chat-toggle-btn').textContent = '✕';
+      if (state.chatMessages.length === 0) initChatWelcome();
+      if (window.innerWidth <= 768) {
+        // On mobile auto-expand: raise bubble above overlay
+        document.getElementById('chat-bubble').style.zIndex = '300';
+        document.getElementById('chat-overlay').classList.add('visible');
+      }
+      setTimeout(() => document.getElementById('chat-input').focus(), 200);
+    }
+
+    function closeChat() {
+      state.chatOpen = false;
+      state.chatExpanded = false;
+      document.getElementById('chat-bubble').style.zIndex = '';
+      document.getElementById('chat-panel').classList.remove('open', 'expanded');
+      document.getElementById('chat-overlay').classList.remove('visible');
+      document.getElementById('chat-toggle-btn').textContent = '💬';
+      const btn = document.getElementById('chat-expand-btn');
+      if (btn) btn.innerHTML = ICON_EXPAND;
+    }
+
+    function initChatWelcome() {
+      const welcome = { role: 'assistant', content: t('chat.welcome') };
+      state.chatMessages = [welcome];
+      renderChatMessages();
+    }
+
+    function renderChatMessages() {
+      const container = document.getElementById('chat-messages');
+      const l = state.lang;
+      container.innerHTML = state.chatMessages.map(msg => {
+        if (msg.faq) {
+          const faqs = CLIENT_DATA.chatbot.faq || [];
+          const chips = faqs
+            .map((item, i) => i === msg.excludeIdx ? null :
+              `<button class="chat-faq-chip" onclick="answerFaq(${i})">${escapeHtml(item.q[l])}</button>`)
+            .filter(Boolean).join('');
+          return `<div class="chat-msg assistant">${escapeHtml(msg.content).replace(/\n/g, '<br>')}<div class="chat-faq-wrap">${chips}</div></div>`;
+        }
+        if (msg.faqFollowup) {
+          return `<div class="chat-msg assistant">${escapeHtml(msg.content).replace(/\n/g, '<br>')}
+            <div class="chat-faq-wrap">
+              <button class="chat-faq-chip" onclick="showFaqAgain(${msg.excludeIdx})">${escapeHtml(t('chat.faq.yes'))}</button>
+              <button class="chat-faq-chip" onclick="declineFaq()">${escapeHtml(t('chat.faq.no'))}</button>
+            </div></div>`;
+        }
+        return `<div class="chat-msg ${msg.role}${msg.typing ? ' typing' : ''}">${escapeHtml(msg.content).replace(/\n/g, '<br>')}</div>`;
+      }).join('');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+      const container = document.getElementById('chat-messages');
+      const el = document.createElement('div');
+      el.id = 'chat-typing';
+      el.className = 'chat-typing-indicator';
+      el.innerHTML = '<span class="chat-typing-dot"></span><span class="chat-typing-dot"></span><span class="chat-typing-dot"></span>';
+      container.appendChild(el);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      const el = document.getElementById('chat-typing');
+      if (el) el.remove();
+    }
+
+    function showFaqFallback() {
+      state.chatMessages.push({ role: 'assistant', faq: true, content: t('chat.faq.unavailable') });
+    }
+
+    function answerFaq(i) {
+      const faq = (CLIENT_DATA.chatbot.faq || [])[i];
+      if (!faq) return;
+      const l = state.lang;
+      state.chatMessages = state.chatMessages.filter(m => !m.faq && !m.faqFollowup);
+      state.chatMessages.push({ role: 'user', content: faq.q[l] });
+      renderChatMessages();
+      showTypingIndicator();
+      setTimeout(() => {
+        hideTypingIndicator();
+        state.chatMessages.push({ role: 'assistant', content: faq.a[l] });
+        state.chatMessages.push({ role: 'assistant', faqFollowup: true, excludeIdx: i, content: t('chat.faq.followup') });
+        renderChatMessages();
+      }, 1000);
+    }
+
+    function showFaqAgain(excludeIdx) {
+      state.chatMessages = state.chatMessages.filter(m => !m.faqFollowup);
+      state.chatMessages.push({ role: 'assistant', faq: true, excludeIdx, content: t('chat.faq.unavailable') });
+      renderChatMessages();
+    }
+
+    function declineFaq() {
+      state.chatMessages = state.chatMessages.filter(m => !m.faqFollowup);
+      state.chatMessages.push({ role: 'assistant', content: t('chat.faq.thanks') });
+      renderChatMessages();
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    async function sendMessage() {
+      if (state.chatLoading) return;
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      state.chatMessages.push({ role: 'user', content: text });
+      state.chatLoading = true;
+      document.getElementById('chat-send').disabled = true;
+      renderChatMessages();
+      showTypingIndicator();
+
+      try {
+        const res = await fetch('/.netlify/functions/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: state.chatMessages.map(m => ({ role: m.role, content: m.content })),
+            systemPrompt: CLIENT_DATA.chatbot.systemPrompt[state.lang]
+          })
+        });
+
+        if (!res.ok) throw new Error('Network response was not ok');
+        const data = await res.json();
+        state.chatMessages.push({ role: 'assistant', content: data.content });
+      } catch {
+        showFaqFallback();
+      }
+
+      hideTypingIndicator();
+      state.chatLoading = false;
+      document.getElementById('chat-send').disabled = false;
+      renderChatMessages();
+    }
+
+    // =====================================================
+    // TOUR GUIDE
+    // =====================================================
+    function startTour() {
+      state.tourActive = true;
+      state.tourStep = 0;
+      document.body.classList.add('tour-active');
+      document.getElementById('tour-tooltip').classList.add('active');
+      showTourStep();
+    }
+
+    function showTourStep() {
+      const steps = tourSteps;
+      const step = steps[state.tourStep];
+      const l = state.lang;
+      const total = steps.length;
+
+      // Spotlight
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('tour-spotlight'));
+      const target = document.getElementById(step.sectionId);
+      if (target) {
+        target.classList.add('tour-spotlight');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // Tooltip content
+      document.getElementById('tour-step-label').textContent =
+        `${state.tourStep + 1} ${t('tour.of')} ${total}`;
+      document.getElementById('tour-title-text').textContent = step.title[l];
+      document.getElementById('tour-desc-text').textContent = step.desc[l];
+
+      const nextBtn = document.getElementById('tour-next-btn');
+      nextBtn.textContent = state.tourStep < total - 1 ? t('tour.next') : t('tour.finish');
+      document.getElementById('tour-skip-btn').textContent = t('tour.skip');
+    }
+
+    function nextTourStep() {
+      if (state.tourStep < tourSteps.length - 1) {
+        state.tourStep++;
+        showTourStep();
+      } else {
+        endTour();
+      }
+    }
+
+    function endTour() {
+      state.tourActive = false;
+      document.body.classList.remove('tour-active');
+      document.getElementById('tour-tooltip').classList.remove('active');
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('tour-spotlight'));
+    }
+
+    // =====================================================
+    // INTERSECTION OBSERVER — scroll animations
+    // =====================================================
+    function observeCards() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(
+        '.exp-card, .skills-card, .edu-card, .contact-card, .sobre-mi-card, .skills-unified'
+      ).forEach(el => observer.observe(el));
+    }
+
+    // =====================================================
+    // INIT
+    // =====================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSavedTheme();
+      render();
+    });
+  </script>
+
+</body>
+</html>
