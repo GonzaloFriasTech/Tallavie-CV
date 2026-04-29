@@ -23,8 +23,8 @@ window.CLIENT_DATA = {
     phone: "+54 011 5010-0586",
     linkedin: "www.linkedin.com/in/ezequiel-tallavi",
     location: {
-      es: "Tigre, Buenos Aires, Argentina",
-      en: "Tigre, Buenos Aires, Argentina"
+      es: "Tigre, Buenos Aires",
+      en: "Tigre, Buenos Aires"
     }
   },
 
@@ -331,6 +331,52 @@ Be concise, warm, and professional. Avoid long bullet lists if you can answer in
 If asked something outside Ezequiel's profile, kindly redirect to contacting him directly.
 Never invent information not present in this profile.`
     }
-  }
+  },
+
+  // ----------------------------------------------------------
+  // TOUR GUIDE
+  // ----------------------------------------------------------
+  tour: [
+    {
+      sectionId: 'hero',
+      title: { es: 'Hola, soy Ezequiel', en: "Hi, I'm Ezequiel" },
+      desc: {
+        es: 'Te dejo un recorrido rápido por mi perfil: qué hago, en qué trabajé y cómo puedo aportar.',
+        en: "Here's a quick tour of my profile: what I do, where I've worked, and what I can bring to the table."
+      }
+    },
+    {
+      sectionId: 'experiencia',
+      title: { es: 'Qué hice hasta ahora', en: "What I've done so far" },
+      desc: {
+        es: 'Experiencias, roles y resultados en cada etapa de mi carrera.',
+        en: 'Experiences, roles, and results at each stage of my career.'
+      }
+    },
+    {
+      sectionId: 'mi-formacion',
+      title: { es: 'Mi Formación', en: 'My Background' },
+      desc: {
+        es: 'Dónde estudié, qué títulos obtuve y los logros académicos que fui sumando en el camino.',
+        en: "Where I studied, what degrees I earned, and the academic achievements I've built along the way."
+      }
+    },
+    {
+      sectionId: 'sobre-mi',
+      title: { es: 'Cómo trabajo', en: 'How I work' },
+      desc: {
+        es: 'Mis habilidades, herramientas e intereses fuera del trabajo.',
+        en: 'My skills, tools, and interests outside of work.'
+      }
+    },
+    {
+      sectionId: 'contacto',
+      title: { es: 'Conectemos', en: "Let's connect" },
+      desc: {
+        es: 'Si te interesa mi perfil, acá tenés mis datos para contactarme.',
+        en: 'If my profile interests you, here are my details to get in touch.'
+      }
+    }
+  ]
 
 };
